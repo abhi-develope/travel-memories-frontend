@@ -3,6 +3,9 @@ import { Fraunces, Caveat, Manrope } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import FloatingElements from "@/components/FloatingElements";
+import SparkleTrail from "@/components/SparkleTrail";
+import WelcomeSurprise from "@/components/WelcomeSurprise";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -38,8 +41,11 @@ export default function RootLayout({
       <body
         className={`${fraunces.variable} ${caveat.variable} ${manrope.variable} font-body antialiased`}
       >
+        <WelcomeSurprise />
+        <FloatingElements />
+        <SparkleTrail />
         <Navbar />
-        <main className="min-h-screen">{children}</main>
+        <main className="relative z-10 min-h-screen">{children}</main>
         <Footer />
       </body>
     </html>

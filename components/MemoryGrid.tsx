@@ -11,6 +11,12 @@ import { Compass, RefreshCcw } from "lucide-react";
 
 type Filter = "all" | MemoryCategory;
 
+const FILTER_CONFIG: { value: Filter; label: string; emoji: string }[] = [
+  { value: "all", label: "Everything", emoji: "📸" },
+  { value: "us", label: "Our Adventures", emoji: "✨" },
+  { value: "her", label: "Solo Adventures", emoji: "🌎" },
+];
+
 export default function MemoryGrid() {
   const [memories, setMemories] = useState<Memory[]>([]);
   const [filter, setFilter] = useState<Filter>("all");
@@ -38,18 +44,33 @@ export default function MemoryGrid() {
   return (
     <section className="mx-auto max-w-6xl px-6 py-12">
       <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
-        <h2 className="font-display text-3xl italic text-ink">The Scrapbook</h2>
+        <h2 className="font-display text-3xl italic text-ink">
+          <span className="squiggly-underline">The Scrapbook</span>{" "}
+          <motion.span
+            className="inline-block text-2xl"
+            animate={{ rotate: [0, 10, -10, 0] }}
+            transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
+          >
+            📒
+          </motion.span>
+        </h2>
         <div className="flex gap-2">
-          {(["all", "us", "her"] as Filter[]).map((f) => (
-            <Button
-              key={f}
-              size="sm"
-              variant={filter === f ? "default" : "outline"}
-              className="rounded-full"
-              onClick={() => setFilter(f)}
+          {FILTER_CONFIG.map((f) => (
+            <motion.div
+              key={f.value}
+              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.05 }}
             >
-              {f === "all" ? "All" : f === "us" ? "Us" : "Her trips"}
-            </Button>
+              <Button
+                size="sm"
+                variant={filter === f.value ? "default" : "outline"}
+                className="rounded-full"
+                onClick={() => setFilter(f.value)}
+              >
+                <span className="mr-1">{f.emoji}</span>
+                {f.label}
+              </Button>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -80,12 +101,17 @@ export default function MemoryGrid() {
           animate={{ opacity: 1 }}
           className="flex flex-col items-center gap-4 rounded-lg border-2 border-dashed border-kraft py-20 text-center"
         >
-          <Compass size={32} className="text-ink-soft" />
+          <motion.div
+            animate={{ rotate: [0, 360] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+          >
+            <Compass size={32} className="text-ink-soft" />
+          </motion.div>
           <p className="font-hand text-2xl text-ink-soft">
-            No memories here yet — the first stamp on this passport is waiting for you.
+            No memories here yet — the first stamp on this passport is waiting for you. ✈️
           </p>
           <Link href="/upload">
-            <Button className="rounded-full">Add the first one</Button>
+            <Button className="rounded-full">🎒 Add the first one</Button>
           </Link>
         </motion.div>
       )}

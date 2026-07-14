@@ -181,7 +181,7 @@ export default function UploadForm() {
             className="rounded-full"
             onClick={() => setCategory("her")}
           >
-            Her trip
+            Solo Adventure 🌎
           </Button>
           <Button
             type="button"
@@ -189,7 +189,7 @@ export default function UploadForm() {
             className="rounded-full"
             onClick={() => setCategory("us")}
           >
-            A trip together
+            Our Adventure ✨
           </Button>
         </div>
       </div>
