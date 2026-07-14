@@ -6,28 +6,22 @@ import { motion, AnimatePresence } from "motion/react";
 const SPARKLE_EMOJIS = ["✨", "⭐", "🌟", "💫", "✨", "⭐"];
 
 export default function WelcomeSurprise() {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const [phase, setPhase] = useState<"dark" | "message" | "reveal" | "done">("dark");
 
   useEffect(() => {
-    const alreadySeen = sessionStorage.getItem("welcomeSurpriseSeen");
-    if (!alreadySeen) {
-      setShow(true);
-      sessionStorage.setItem("welcomeSurpriseSeen", "true");
+    // Phase timeline
+    const t1 = setTimeout(() => setPhase("message"), 800);
+    const t2 = setTimeout(() => setPhase("reveal"), 3500);
+    const t3 = setTimeout(() => setPhase("done"), 5000);
+    const t4 = setTimeout(() => setShow(false), 5500);
 
-      // Phase timeline
-      const t1 = setTimeout(() => setPhase("message"), 800);
-      const t2 = setTimeout(() => setPhase("reveal"), 3500);
-      const t3 = setTimeout(() => setPhase("done"), 5000);
-      const t4 = setTimeout(() => setShow(false), 5500);
-
-      return () => {
-        clearTimeout(t1);
-        clearTimeout(t2);
-        clearTimeout(t3);
-        clearTimeout(t4);
-      };
-    }
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+      clearTimeout(t4);
+    };
   }, []);
 
   if (!show) return null;
