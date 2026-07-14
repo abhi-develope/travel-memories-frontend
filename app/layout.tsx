@@ -6,6 +6,8 @@ import Footer from "@/components/Footer";
 import FloatingElements from "@/components/FloatingElements";
 import SparkleTrail from "@/components/SparkleTrail";
 import WelcomeSurprise from "@/components/WelcomeSurprise";
+import FloatingGameButton from "@/components/FloatingGameButton";
+import FunQuoteToast from "@/components/FunQuoteToast";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -47,6 +49,8 @@ export default function RootLayout({
         <Navbar />
         <main className="relative z-10 min-h-screen">{children}</main>
         <Footer />
+        <FloatingGameButton />
+        <FunQuoteToast />
       </body>
     </html>
   );

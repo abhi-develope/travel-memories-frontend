@@ -181,7 +181,7 @@ export default function UploadForm() {
             className="rounded-full"
             onClick={() => setCategory("her")}
           >
-            Solo Adventure 🌎
+            Other Trip 🌏
           </Button>
           <Button
             type="button"
@@ -195,7 +195,7 @@ export default function UploadForm() {
       </div>
 
       <div className="mt-5">
-        <Label htmlFor="accessCode">Access code (if set up)</Label>
+        <Label htmlFor="accessCode">Access code </Label>
         <Input
           id="accessCode"
           type="password"
