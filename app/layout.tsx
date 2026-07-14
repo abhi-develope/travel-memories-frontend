@@ -8,6 +8,7 @@ import SparkleTrail from "@/components/SparkleTrail";
 import WelcomeSurprise from "@/components/WelcomeSurprise";
 import FloatingGameButton from "@/components/FloatingGameButton";
 import FunQuoteToast from "@/components/FunQuoteToast";
+import SecretPhotoReveal from "@/components/SecretPhotoReveal";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -51,6 +52,7 @@ export default function RootLayout({
         <Footer />
         <FloatingGameButton />
         <FunQuoteToast />
+        <SecretPhotoReveal />
       </body>
     </html>
   );
