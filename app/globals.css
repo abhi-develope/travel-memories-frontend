@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-kraft;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-paper text-ink font-body;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(34, 68, 63, 0.06) 1px, transparent 0);
+    background-size: 22px 22px;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Dashed hand-drawn style flight path line */
+  .flight-line {
+    stroke-dasharray: 6 8;
+    stroke-linecap: round;
+  }
+
+  /* Torn-paper / postcard edge feel via soft shadow + rotation utility */
+  .postcard-tilt {
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+  .postcard-tilt:hover {
+    transform: rotate(0deg) scale(1.03) translateY(-4px);
+    box-shadow: 0 18px 40px -14px rgba(34, 68, 63, 0.4);
+  }
+
+  .stamp-border {
+    -webkit-mask-image: radial-gradient(circle 3.2px at 6px 6px, transparent 98%, #000 100%),
+      linear-gradient(#000, #000);
+    -webkit-mask-repeat: repeat-x, no-repeat;
+    -webkit-mask-position: -3px -3px, 0 0;
+    -webkit-mask-size: 12px 12px, 100% 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
