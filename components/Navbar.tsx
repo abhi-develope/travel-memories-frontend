@@ -31,7 +31,7 @@ export default function Navbar() {
     setEggMsg(
       EASTER_EGG_MESSAGES[
         Math.floor(Math.random() * EASTER_EGG_MESSAGES.length)
-      ]
+      ],
     );
     setEasterEgg(true);
     setTimeout(() => setEasterEgg(false), 3500);
@@ -52,7 +52,7 @@ export default function Navbar() {
           >
             <Plane size={16} />
           </motion.span>
-          <span className="hidden sm:inline">Wish You Were Here</span>
+          <span className="hidden sm:inline">Miles Apart, Still Together</span>
           <span className="sm:hidden">WYAH</span>
         </Link>
         <div className="flex items-center gap-1 sm:gap-2">
@@ -62,7 +62,7 @@ export default function Navbar() {
               href={link.href}
               className={cn(
                 "relative rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-paper-dark",
-                pathname === link.href ? "text-rose" : "text-ink-soft"
+                pathname === link.href ? "text-rose" : "text-ink-soft",
               )}
             >
               <span className="mr-1 hidden sm:inline">{link.emoji}</span>

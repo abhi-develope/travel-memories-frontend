@@ -62,9 +62,23 @@ export default function Hero() {
         className="mx-auto max-w-3xl text-center"
       >
         {/* Waving hand + tag */}
+        <motion.h2
+          variants={item}
+          animate={{
+            y: [0, -3, 0],
+            rotate: [0, -0.4, 0.4, 0],
+            scale: [1, 1.01, 1],
+          }}
+          transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
+          className="mx-auto mt-3 max-w-3xl rounded-[2rem] border border-rose/20 bg-gradient-to-r from-paper-dark/90 via-[#fdf8ef] to-paper-dark/90 px-4 py-3 font-hand text-xl leading-relaxed tracking-[0.01em] text-ink shadow-[0_10px_24px_-16px_rgba(34,68,63,0.35)] sm:px-6 sm:py-4 sm:text-2xl"
+        >
+          <span className="text-rose">तुझ्यासोबतचे क्षणच</span> माझ्या
+          आयुष्यातील सर्वात सुंदर प्रवास आहेत.
+          <span className="ml-2 inline-block text-xl text-mustard">✨</span>
+        </motion.h2>
         <motion.span
           variants={item}
-          className="inline-flex items-center gap-2 rounded-full border-2 border-dashed border-kraft bg-paper-dark px-4 py-1 font-hand text-lg text-ink-soft"
+          className="inline-flex items-center gap-2 rounded-full border-2 border-dashed border-kraft bg-paper-dark px-4 py-1 font-hand text-lg text-ink-soft mt-3"
         >
           <motion.span
             animate={{ rotate: [0, 14, -8, 14, -4, 10, 0] }}
@@ -97,12 +111,15 @@ export default function Hero() {
           variants={item}
           className="mx-auto mt-5 max-w-xl text-base text-ink-soft sm:text-lg"
         >
-          A shared scrapbook for us — the trips we&apos;ve already had, and every
-          new one you&apos;re about to collect. Add photos as you go, and I&apos;ll be
-          right here, cheering from your phone screen. 💛
+          A shared scrapbook for us — the trips we&apos;ve already had, and
+          every new one you&apos;re about to collect. Add photos as you go, and
+          I&apos;ll be right here, cheering from your phone screen. 💛
         </motion.p>
 
-        <motion.div variants={item} className="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <motion.div
+          variants={item}
+          className="mt-8 flex flex-wrap items-center justify-center gap-4"
+        >
           <Link href="/upload">
             <Button size="lg" variant="default" className="rounded-full group">
               <motion.span

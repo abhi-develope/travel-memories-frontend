@@ -22,9 +22,9 @@ const LOVE_LETTER = `This photo means the world to me.
 Every time I look at it, I remember exactly how I felt —
 grateful, happy, and so lucky to have you in my life.
 
-No matter how far you travel, no matter how many stamps
-fill your passport — just know that this moment, right here,
-is my favorite place in the universe.
+No matter how many cities steal your breath, 
+or how many horizons you chase, 
+you'll always be my favorite destination.
 
 You and me. Always. 💛`;
 

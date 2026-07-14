@@ -30,8 +30,9 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Wish You Were Here 🌍",
-  description: "A little postcard-shaped corner of the internet, made for someone who's off exploring the world.",
+  title: "Our Little Corner 🌍",
+  description:
+    "A little postcard-shaped corner of the internet, made for someone who's off exploring the world.",
 };
 
 export default function RootLayout({

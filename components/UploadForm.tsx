@@ -66,15 +66,28 @@ export default function UploadForm() {
     setProgress(0);
     try {
       await createMemory(
-        { title, caption, location, date, category, image: file, accessCode: accessCode || undefined },
-        (percent) => setProgress(percent)
+        {
+          title,
+          caption,
+          location,
+          date,
+          category,
+          image: file,
+          accessCode: accessCode || undefined,
+        },
+        (percent) => setProgress(percent),
       );
       setSuccess(true);
       resetForm();
-      setTimeout(() => setSuccess(false), 3000);
       router.refresh();
+      // Redirect to memories page after a short delay
+      setTimeout(() => {
+        router.push("/memories");
+      }, 1500);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Upload failed. Please try again.");
+      setError(
+        err instanceof Error ? err.message : "Upload failed. Please try again.",
+      );
     } finally {
       setSubmitting(false);
     }
@@ -85,7 +98,9 @@ export default function UploadForm() {
       onSubmit={handleSubmit}
       className="mx-auto max-w-xl rounded-lg border-2 border-dashed border-kraft bg-card p-6 shadow-postcard sm:p-8"
     >
-      <h2 className="font-display text-2xl italic text-ink">Add a new memory</h2>
+      <h2 className="font-display text-2xl italic text-ink">
+        Add a new memory
+      </h2>
       <p className="mt-1 text-sm text-ink-soft">
         A photo, a place, a little story — that's all it takes.
       </p>
@@ -105,7 +120,11 @@ export default function UploadForm() {
         >
           {preview ? (
             <>
-              <img src={preview} alt="Preview" className="h-full w-full object-cover" />
+              <img
+                src={preview}
+                alt="Preview"
+                className="h-full w-full object-cover"
+              />
               <button
                 type="button"
                 onClick={(e) => {
@@ -168,7 +187,12 @@ export default function UploadForm() {
         </div>
         <div>
           <Label htmlFor="date">Date</Label>
-          <Input id="date" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+          <Input
+            id="date"
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+          />
         </div>
       </div>
 
@@ -201,12 +225,14 @@ export default function UploadForm() {
           type="password"
           value={accessCode}
           onChange={(e) => setAccessCode(e.target.value)}
-          placeholder="Only needed if your backend requires one"
+          placeholder="something you call me very frequently..."
         />
       </div>
 
       {error && (
-        <p className="mt-4 rounded-md bg-rose/10 px-3 py-2 text-sm text-rose">{error}</p>
+        <p className="mt-4 rounded-md bg-rose/10 px-3 py-2 text-sm text-rose">
+          {error}
+        </p>
       )}
 
       {submitting && (
@@ -220,7 +246,12 @@ export default function UploadForm() {
         </div>
       )}
 
-      <Button type="submit" size="lg" className="mt-6 w-full rounded-full" disabled={submitting}>
+      <Button
+        type="submit"
+        size="lg"
+        className="mt-6 w-full rounded-full"
+        disabled={submitting}
+      >
         <UploadCloud size={18} />
         {submitting ? `Uploading… ${progress}%` : "Save this memory"}
       </Button>
