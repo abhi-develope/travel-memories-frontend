@@ -13,14 +13,15 @@ export default function WelcomeSurprise() {
     // Phase timeline
     const t1 = setTimeout(() => setPhase("message"), 800);
     const t2 = setTimeout(() => setPhase("reveal"), 3500);
-    const t3 = setTimeout(() => setPhase("done"), 5000);
-    const t4 = setTimeout(() => setShow(false), 5500);
+    const t3 = setTimeout(() => {
+      setPhase("done");
+      setShow(false);
+    }, 5000); // Set show to false immediately when phase is done
 
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
       clearTimeout(t3);
-      clearTimeout(t4);
     };
   }, []);
 
@@ -31,12 +32,14 @@ export default function WelcomeSurprise() {
       {phase !== "done" && (
         <motion.div
           className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden"
+          style={{ pointerEvents: "none" }}
           initial={{ opacity: 1 }}
+          animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
         >
           {/* Dark background with sparkles */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f3460]">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f3460]" style={{ pointerEvents: "none" }}>
             {SPARKLE_EMOJIS.concat(SPARKLE_EMOJIS, SPARKLE_EMOJIS).map((emoji, i) => (
               <motion.span
                 key={i}
@@ -97,12 +100,14 @@ export default function WelcomeSurprise() {
             <>
               <motion.div
                 className="absolute left-0 top-0 h-full w-1/2 bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f3460] z-20"
+                style={{ pointerEvents: "none" }}
                 initial={{ x: 0 }}
                 animate={{ x: "-100%" }}
                 transition={{ duration: 1.2, ease: [0.65, 0, 0.35, 1] }}
               />
               <motion.div
                 className="absolute right-0 top-0 h-full w-1/2 bg-gradient-to-bl from-[#1a1a2e] via-[#16213e] to-[#0f3460] z-20"
+                style={{ pointerEvents: "none" }}
                 initial={{ x: 0 }}
                 animate={{ x: "100%" }}
                 transition={{ duration: 1.2, ease: [0.65, 0, 0.35, 1] }}

@@ -1,11 +1,12 @@
 "use client";
 
 import { motion } from "motion/react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import FlightPath from "./FlightPath";
 import SurpriseButton from "./SurpriseButton";
 import { Button } from "@/components/ui/button";
-import { Camera } from "lucide-react";
+import { Camera, Loader2 } from "lucide-react";
 
 const container = {
   hidden: {},
@@ -27,6 +28,21 @@ const BOUNCING_EMOJIS = [
 ];
 
 export default function Hero() {
+  const router = useRouter();
+  const [navigatingTo, setNavigatingTo] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Prefetch both routes on mount
+    router.prefetch("/upload");
+    router.prefetch("/memories");
+    setNavigatingTo(null);
+  }, [router]);
+
+  const handleNavigate = (href: string) => {
+    setNavigatingTo(href);
+    router.push(href);
+  };
+
   return (
     <section className="relative overflow-hidden px-6 pb-10 pt-16 sm:pt-24">
       {/* Bouncing travel emojis scattered around the hero */}
@@ -96,7 +112,7 @@ export default function Hero() {
           className="mt-6 font-display text-4xl italic leading-tight sm:text-6xl text-balance"
         >
           <span className="text-gradient-shimmer">Wish you were here</span> —
-          <br className="hidden sm:block" /> but I love that you&apos;re{" "}
+          <br className="hidden sm:block" /> but I love that you're{" "}
           <motion.span
             className="text-rose not-italic inline-block"
             animate={{ scale: [1, 1.05, 1] }}
@@ -111,17 +127,26 @@ export default function Hero() {
           variants={item}
           className="mx-auto mt-5 max-w-xl text-base text-ink-soft sm:text-lg"
         >
-          A shared scrapbook for us — the trips we&apos;ve already had, and
-          every new one you&apos;re about to collect. Add photos as you go, and
-          I&apos;ll be right here, cheering from your phone screen. 💛
+          A shared scrapbook for us — the trips we've already had, and every
+          new one you're about to collect. Add photos as you go, and I'll be
+          right here, cheering from your phone screen. 💛
         </motion.p>
 
         <motion.div
           variants={item}
           className="mt-8 flex flex-wrap items-center justify-center gap-4"
         >
-          <Link href="/upload">
-            <Button size="lg" variant="default" className="rounded-full group">
+          <Button
+            size="lg"
+            variant="default"
+            className="rounded-full group"
+            onClick={() => handleNavigate("/upload")}
+            onMouseEnter={() => router.prefetch("/upload")}
+            onFocus={() => router.prefetch("/upload")}
+          >
+            {navigatingTo === "/upload" ? (
+              <Loader2 size={18} className="animate-spin" />
+            ) : (
               <motion.span
                 className="inline-block"
                 whileHover={{ rotate: 15 }}
@@ -129,14 +154,26 @@ export default function Hero() {
               >
                 <Camera size={18} />
               </motion.span>
-              Drop a new memory
-            </Button>
-          </Link>
-          <Link href="/memories">
-            <Button size="lg" variant="outline" className="rounded-full">
-              📖 Browse memories
-            </Button>
-          </Link>
+            )}
+            Drop a new memory
+          </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            className="rounded-full"
+            onClick={() => handleNavigate("/memories")}
+            onMouseEnter={() => router.prefetch("/memories")}
+            onFocus={() => router.prefetch("/memories")}
+          >
+            {navigatingTo === "/memories" ? (
+              <>
+                <Loader2 size={18} className="animate-spin mr-1" />
+              </>
+            ) : (
+              "📖"
+            )}
+            Browse memories
+          </Button>
         </motion.div>
 
         {/* Surprise button with pulsing glow */}

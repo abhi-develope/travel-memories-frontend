@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Gamepad2 } from "lucide-react";
 import TravelMatchGame from "./TravelMatchGame";
@@ -57,10 +57,11 @@ export default function FloatingGameButton() {
 function GameTooltip() {
   const [show, setShow] = useState(true);
 
-  // Auto-hide after 6 seconds
-  if (typeof window !== "undefined") {
-    setTimeout(() => setShow(false), 6000);
-  }
+  useEffect(() => {
+    const timer = window.setTimeout(() => setShow(false), 6000);
+
+    return () => window.clearTimeout(timer);
+  }, []);
 
   return (
     <AnimatePresence>
