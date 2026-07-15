@@ -69,7 +69,7 @@ export default function Navbar() {
             <Plane size={16} />
           </motion.span>
           <span className="hidden sm:inline">Miles Apart, Still Together</span>
-          <span className="sm:hidden">WYAH</span>
+          <span className="sm:hidden">🤞</span>
         </button>
         <div className="flex items-center gap-1 sm:gap-2">
           {links.map((link) => (

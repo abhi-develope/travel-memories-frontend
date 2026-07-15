@@ -13,7 +13,7 @@ export default function FloatingGameButton() {
       {/* Floating button — fixed bottom-right */}
       <motion.button
         onClick={() => setGameOpen(true)}
-        className="fixed bottom-6 right-6 z-[50] flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-rose to-[#ff8fab] text-white shadow-lg hover:shadow-xl transition-shadow"
+        className="fixed bottom-4 right-4 z-[50] flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-full bg-gradient-to-br from-rose to-[#ff8fab] text-white shadow-lg hover:shadow-xl transition-shadow"
         whileHover={{ scale: 1.1, rotate: 5 }}
         whileTap={{ scale: 0.9 }}
         animate={{
@@ -46,9 +46,7 @@ export default function FloatingGameButton() {
 
       {/* Game modal */}
       <AnimatePresence>
-        {gameOpen && (
-          <TravelMatchGame onClose={() => setGameOpen(false)} />
-        )}
+        {gameOpen && <TravelMatchGame onClose={() => setGameOpen(false)} />}
       </AnimatePresence>
     </>
   );
@@ -67,7 +65,7 @@ function GameTooltip() {
     <AnimatePresence>
       {show && (
         <motion.div
-          className="fixed bottom-[84px] right-6 z-[50] max-w-[180px]"
+          className="fixed bottom-[72px] right-4 z-[50] max-w-[180px] sm:bottom-[84px] sm:right-6"
           initial={{ opacity: 0, y: 10, scale: 0.9 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 10, scale: 0.9 }}
@@ -76,7 +74,7 @@ function GameTooltip() {
           <div className="rounded-xl bg-ink px-3 py-2 text-center text-xs text-paper shadow-lg">
             <p className="font-hand text-sm">Psst! Play a game 🎮✨</p>
             {/* Arrow */}
-            <div className="absolute -bottom-1.5 right-5 h-3 w-3 rotate-45 bg-ink" />
+            <div className="absolute -bottom-1.5 right-4 h-3 w-3 rotate-45 bg-ink" />
           </div>
         </motion.div>
       )}

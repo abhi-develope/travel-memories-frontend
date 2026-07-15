@@ -67,7 +67,7 @@ export default function MemoryGrid() {
         <div className="washi-tape washi-tape-2" style={{ top: "-8px", left: "5%", transform: "rotate(-8deg)", width: "60px" }} />
         <div className="washi-tape washi-tape-1" style={{ top: "-6px", right: "10%", transform: "rotate(14deg)", width: "55px" }} />
 
-        <div className="flex flex-wrap items-center justify-between gap-4 rounded-xl border-2 border-dashed border-kraft bg-card/80 px-6 py-5 shadow-postcard backdrop-blur-sm">
+        <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center justify-between gap-4 rounded-xl border-2 border-dashed border-kraft bg-card/80 px-4 sm:px-6 py-5 shadow-postcard backdrop-blur-sm">
           <div className="flex items-center gap-3">
             <motion.span
               className="text-4xl"
@@ -77,7 +77,7 @@ export default function MemoryGrid() {
               📒
             </motion.span>
             <div>
-              <h2 className="font-display text-3xl italic text-ink">
+              <h2 className="font-display text-2xl sm:text-3xl italic text-ink">
                 <span className="squiggly-underline">The Scrapbook</span>
               </h2>
               {!loading && !error && memories.length > 0 && (
@@ -98,7 +98,7 @@ export default function MemoryGrid() {
               )}
             </div>
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
             {FILTER_CONFIG.map((f) => (
               <motion.div
                 key={f.value}

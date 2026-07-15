@@ -10,8 +10,22 @@ import ConfettiBurst from "./ConfettiBurst";
 const GOAL = 20;
 
 const BALLOON_EMOJIS = [
-  "✈️", "🌴", "📸", "🏖️", "🐚", "🍦", "🎒", "⭐",
-  "🌺", "🦋", "🌅", "🧳", "🗺️", "🌈", "☀️", "🌍",
+  "✈️",
+  "🌴",
+  "📸",
+  "🏖️",
+  "🐚",
+  "🍦",
+  "🎒",
+  "⭐",
+  "🌺",
+  "🦋",
+  "🌅",
+  "🧳",
+  "🗺️",
+  "🌈",
+  "☀️",
+  "🌍",
 ];
 
 const BALLOON_COLORS = [
@@ -126,7 +140,10 @@ export default function TravelMatchGame({ onClose }: { onClose: () => void }) {
     };
 
     // Spawn every 800-1200ms
-    spawnIntervalRef.current = setInterval(spawn, Math.max(600, 1000 - score * 15));
+    spawnIntervalRef.current = setInterval(
+      spawn,
+      Math.max(600, 1000 - score * 15),
+    );
 
     return () => {
       gameActive.current = false;
@@ -185,8 +202,14 @@ export default function TravelMatchGame({ onClose }: { onClose: () => void }) {
         ? BONUS_MESSAGES[Math.floor(Math.random() * BONUS_MESSAGES.length)]
         : undefined;
 
-      setPops((prev) => [...prev, { id: popId, x, y, emoji: balloon.emoji, bonusMsg }]);
-      setTimeout(() => setPops((prev) => prev.filter((p) => p.id !== popId)), 1200);
+      setPops((prev) => [
+        ...prev,
+        { id: popId, x, y, emoji: balloon.emoji, bonusMsg },
+      ]);
+      setTimeout(
+        () => setPops((prev) => prev.filter((p) => p.id !== popId)),
+        1200,
+      );
 
       // Show bonus toast for golden balloons
       if (bonusMsg) {
@@ -206,7 +229,7 @@ export default function TravelMatchGame({ onClose }: { onClose: () => void }) {
             usedWinMsgs.current.clear();
           }
           const available = WIN_MESSAGES.map((_, i) => i).filter(
-            (i) => !usedWinMsgs.current.has(i)
+            (i) => !usedWinMsgs.current.has(i),
           );
           const pick = available[Math.floor(Math.random() * available.length)];
           usedWinMsgs.current.add(pick);
@@ -216,7 +239,7 @@ export default function TravelMatchGame({ onClose }: { onClose: () => void }) {
         return newScore;
       });
     },
-    [won]
+    [won],
   );
 
   const resetGame = () => {
@@ -253,7 +276,7 @@ export default function TravelMatchGame({ onClose }: { onClose: () => void }) {
         </div>
 
         {/* Header */}
-        <div className="flex items-center justify-between px-5 pt-4 pb-2">
+        <div className="flex items-center justify-between px-4 pt-4 pb-2 sm:px-5">
           <div>
             <h3 className="font-display text-xl italic text-ink flex items-center gap-2">
               <motion.span
@@ -278,9 +301,11 @@ export default function TravelMatchGame({ onClose }: { onClose: () => void }) {
         </div>
 
         {/* Score bar */}
-        <div className="mx-5 mb-2">
+        <div className="mx-4 mb-2 sm:mx-5">
           <div className="flex items-center justify-between text-xs text-ink-soft mb-1">
-            <span className="font-hand text-base">{score} / {GOAL} popped</span>
+            <span className="font-hand text-base">
+              {score} / {GOAL} popped
+            </span>
             <span className="font-hand text-base">escaped: {missed}</span>
           </div>
           <div className="h-3 w-full overflow-hidden rounded-full bg-paper-dark">
@@ -302,7 +327,7 @@ export default function TravelMatchGame({ onClose }: { onClose: () => void }) {
             <motion.div
               key="game"
               ref={gameAreaRef}
-              className="relative mx-3 mb-4 h-[340px] overflow-hidden rounded-xl bg-gradient-to-b from-sky/10 via-paper to-paper-dark/40 border border-kraft/40"
+              className="relative mx-3 mb-4 h-[280px] sm:h-[340px] overflow-hidden rounded-xl bg-gradient-to-b from-sky/10 via-paper to-paper-dark/40 border border-kraft/40"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -311,14 +336,22 @@ export default function TravelMatchGame({ onClose }: { onClose: () => void }) {
               <motion.span
                 className="absolute top-4 left-[10%] text-3xl opacity-20 pointer-events-none select-none"
                 animate={{ x: [0, 30, 0] }}
-                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                transition={{
+                  duration: 8,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
               >
                 ☁️
               </motion.span>
               <motion.span
                 className="absolute top-8 right-[15%] text-2xl opacity-15 pointer-events-none select-none"
                 animate={{ x: [0, -20, 0] }}
-                transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                transition={{
+                  duration: 10,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
               >
                 ☁️
               </motion.span>
@@ -349,7 +382,10 @@ export default function TravelMatchGame({ onClose }: { onClose: () => void }) {
                   }}
                   transition={{
                     y: { duration: balloon.speed, ease: "linear" },
-                    opacity: { duration: balloon.speed, times: [0, 0.05, 0.85, 1] },
+                    opacity: {
+                      duration: balloon.speed,
+                      times: [0, 0.05, 0.85, 1],
+                    },
                     scale: { duration: 0.3 },
                     x: { duration: 2, repeat: Infinity, ease: "easeInOut" },
                   }}
@@ -439,7 +475,7 @@ export default function TravelMatchGame({ onClose }: { onClose: () => void }) {
             /* Win Screen */
             <motion.div
               key="win"
-              className="flex flex-col items-center gap-4 px-6 py-8 text-center"
+              className="flex flex-col items-center gap-4 px-4 py-6 text-center sm:px-6 sm:py-8"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ type: "spring", damping: 15 }}
@@ -486,11 +522,19 @@ export default function TravelMatchGame({ onClose }: { onClose: () => void }) {
                 </motion.p>
               </motion.div>
 
-              <div className="flex gap-3 mt-2">
-                <Button variant="outline" className="rounded-full" onClick={resetGame}>
+              <div className="mt-2 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+                <Button
+                  variant="outline"
+                  className="rounded-full"
+                  onClick={resetGame}
+                >
                   <RotateCcw size={16} /> Play Again
                 </Button>
-                <Button variant="rose" className="rounded-full" onClick={onClose}>
+                <Button
+                  variant="rose"
+                  className="rounded-full"
+                  onClick={onClose}
+                >
                   <Sparkles size={16} /> Love it! 💛
                 </Button>
               </div>
